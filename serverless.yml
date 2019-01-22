@@ -1,0 +1,33 @@
+service: serverless-websocket
+
+plugins:
+  - serverless-websockets-plugin
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+
+provider:
+  name: aws
+  runtime: python3.7
+
+functions:
+  connectionManager:
+    handler: handler.connectionManager
+    events:
+      - websocket:
+          routeKey: $connect
+      - websocket:
+          routeKey: $disconnect
+
+  defaultMessages:
+    handler: handler.defaultMessage
+    events:
+      - websocket:
+          routeKey: $default
+
+  sendMessage:
+    handler: handler.sendMessage
+    events:
+      - websocket:
+          routeKey: sendMessage
+
