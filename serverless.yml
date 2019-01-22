@@ -2,9 +2,6 @@ service: serverless-websocket
 
 plugins:
   - serverless-websockets-plugin
-custom:
-  pythonRequirements:
-    dockerizePip: non-linux
 
 provider:
   name: aws
